@@ -1,0 +1,27 @@
+extends ./layout/index
+
+block contenido
+    main.container.mt-5  
+            h1.text-center.mt-5 #{pagina}
+            include ./layout/bloque_opiniones.pug
+            .row
+                .col-md-12
+                    h2.d-block.w-100.col.text-center.mb-5 Agrega un Testimonial 
+                    if(errores)
+                        each error in errores
+                            .alert.col.alert-danger.text-center= error.alerta
+
+                    form(action="/opiniones" method="POST").row.justify-content-center.col
+                        .col-md-8
+                            .form-group
+                                label(for="nombre") Nombre
+                                input#nombre(type="text", placeholder="Tu Nombre", name="nombre", value= nombre, class="form-control mb-5")
+
+                            .form-group
+                                label(for="email") Correo Electrónico
+                                input#email(type="email", placeholder="Tu E-mail", name="email", value= email, class="form-control mb-5")
+
+                            .form-group
+                                label(for="mensaje") Mensaje
+                                textarea#mensaje(placeholder="Deja Aquí tu Mensaje", name="mensaje", class="form-control mb-5", rows="7")= mensaje
+                            input.btn.btn-success.btn-block(type="submit")
